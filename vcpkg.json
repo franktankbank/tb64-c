@@ -1,5 +1,5 @@
 {
-  "name": "tb64",
+  "name": "tb64-c",
   "version-semver": "0.1.0",
   "builtin-baseline": "d7112d1a4fb50410d3639f5f586972591d848beb",
   "dependencies": [
