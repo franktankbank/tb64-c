@@ -14,8 +14,9 @@ Read BUILDING.md
 
 ## Usage
 
+Encode a string
 ```sh
-placeholder
+tb64 abcd
 ```
 
 ## Author
