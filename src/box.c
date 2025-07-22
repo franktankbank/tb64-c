@@ -1,18 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "include/box.h"
 
+#include <box.h>
+#include <magic.h>
+#include <safe.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "include/safe.h"
-
 #define RESET_COLOR "\e[m"
-#define HEX_LENGTH 6
-#define RADIX 16
-#define ANSI_LENGTH 32
-#define FIVE 5
 
 char* hex_to_rgb(char* hex_color)
 {
@@ -53,16 +49,15 @@ char* hex_to_rgb(char* hex_color)
 }
 
 // Function to print a Unicode colored box with text
-void print_box(struct RawBox raw_box)
+void print_box(struct Box box)
 {
-    unsigned long long box_width = (unsigned long long)strlen(raw_box.text1)
-        + strlen(raw_box.text2) + FIVE;
-    char* text_color1 = hex_to_rgb(raw_box.text_color_hex1);
-    char* text_color2 = hex_to_rgb(raw_box.text_color_hex2);
-    char* sep_color = hex_to_rgb(raw_box.sep_color_hex);
-    char* box_color = hex_to_rgb(raw_box.box_color_hex);
+    unsigned long long box_width = strlen(box.text1) + strlen(box.text2) + FIVE;
+    char* text_color1 = hex_to_rgb(box.text_color_hex1);
+    char* text_color2 = hex_to_rgb(box.text_color_hex2);
+    char* sep_color = hex_to_rgb(box.sep_color_hex);
+    char* box_color = hex_to_rgb(box.box_color_hex);
     // Top border
-    switch (raw_box.error) {
+    switch (box.error) {
         case 1:
             (void)safe_fprintf(
                 stderr, "  %s\u250F", box_color);  // Top-left corner
@@ -80,14 +75,14 @@ void print_box(struct RawBox raw_box)
             (void)safe_fprintf(stderr,
                                "%s%s%s",
                                text_color1,
-                               raw_box.text1,
+                               box.text1,
                                RESET_COLOR);  // First part of text
             (void)safe_fprintf(
                 stderr, " %s\u2192%s ", sep_color, RESET_COLOR);  // Separator
             (void)safe_fprintf(stderr,
                                "%s%s%s",
                                text_color2,
-                               raw_box.text2,
+                               box.text2,
                                RESET_COLOR);  // Second part of text
             (void)safe_fprintf(stderr,
                                " %s\u2503%s\n",
@@ -114,12 +109,12 @@ void print_box(struct RawBox raw_box)
             printf("  %s\u2503%s ", box_color, RESET_COLOR);  // Left border
             printf("%s%s%s",
                    text_color1,
-                   raw_box.text1,
+                   box.text1,
                    RESET_COLOR);  // First part of text
             printf(" %s\u2192%s ", sep_color, RESET_COLOR);  // Separator
             printf("%s%s%s",
                    text_color2,
-                   raw_box.text2,
+                   box.text2,
                    RESET_COLOR);  // Second part of text
             printf(" %s\u2503%s\n", box_color, RESET_COLOR);  // Right border
 

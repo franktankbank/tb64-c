@@ -1,16 +1,13 @@
+#include <safe.h>
 #include <stddef.h>
 #include <stdio.h>
 #if defined __unix__ || __APPLE__
-#    define CMD_BUF 10240
+#    include <magic.h>
 #    include <string.h>
-
-#    include "include/safe.h"
 #endif
 #ifdef _WIN32
 #    include <string.h>
 #    include <windows.h>
-
-#    include "include/safe.h"
 
 int cbcopy(const char* text)
 {

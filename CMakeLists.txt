@@ -10,6 +10,7 @@ project(
     LANGUAGES C
 )
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 include(cmake/variables.cmake)
@@ -22,7 +23,7 @@ endif()
 
 # ---- Declare executable ----
 
-add_executable(tb64 source/tb64.c source/box.c source/base64.c source/clip.c source/safe.c)
+add_executable(tb64 src/tb64.c src/box.c src/base64.c src/clip.c src/safe.c)
 add_executable(tb64::exe ALIAS tb64)
 
 set_property(TARGET tb64 PROPERTY OUTPUT_NAME tb64)
@@ -31,6 +32,8 @@ target_compile_features(tb64 PRIVATE c_std_99)
 
 find_package(OpenSSL REQUIRED)
 target_link_libraries(tb64 PRIVATE OpenSSL::SSL)
+target_include_directories(tb64 PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(tb64 PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_link_libraries(tb64 PRIVATE OpenSSL::Crypto)
 
 # ---- Install rules ----

@@ -1,7 +1,7 @@
 #ifndef BOX_H
 #define BOX_H
 
-struct RawBox {
+struct Box {
     char* text1;
     char* text_color_hex1;
     char* text2;
@@ -11,6 +11,6 @@ struct RawBox {
     int error;
 };
 
-void print_box(struct RawBox raw_box);
+void print_box(struct Box box);
 
 #endif  // BOX_H
