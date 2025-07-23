@@ -8,9 +8,9 @@
 
 > A tool to encode text into base64 3 times
 
-## Install
+## Building and installing
 
-Read BUILDING.md
+See the [BUILDING](BUILDING.md) document.
 
 ## Usage
 
