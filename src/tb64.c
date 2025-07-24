@@ -11,6 +11,7 @@
 #include <box.h>
 #include <clip.h>
 #include <magic.h>
+#include <stdbool.h>
 
 int main(int argc, char* argv[])
 {
@@ -31,7 +32,7 @@ int main(int argc, char* argv[])
             .text_color_hex2 = "#FFEA00",
             .sep_color_hex = "#FF7F50",
             .box_color_hex = "#7CFC00",
-            .error = 1};
+            .error = true};
         print_box(box);
         return 1;
     }
@@ -47,7 +48,7 @@ int main(int argc, char* argv[])
                             .text_color_hex2 = "#FFEA00",
                             .sep_color_hex = "#FF7F50",
                             .box_color_hex = "#7CFC00",
-                            .error = 1};
+                            .error = true};
         print_box(box);
         return 1;
     }
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
                             .text_color_hex2 = "#FFEA00",
                             .sep_color_hex = "#FF7F50",
                             .box_color_hex = "#7CFC00",
-                            .error = 1};
+                            .error = true};
         print_box(box);
         return 1;
     }
@@ -73,7 +74,7 @@ int main(int argc, char* argv[])
                         .text_color_hex2 = "#FFEA00",
                         .sep_color_hex = "#FF69B4",
                         .box_color_hex = "#7CFC00",
-                        .error = 0};
+                        .error = false};
     print_box(box);
     if (cbcopy(encoded) != 0) {
         struct Box box;
@@ -83,7 +84,7 @@ int main(int argc, char* argv[])
                             .text_color_hex2 = "#FFEA00",
                             .sep_color_hex = "#FF7F50",
                             .box_color_hex = "#7CFC00",
-                            .error = 1};
+                            .error = true};
         print_box(box);
         return 1;
     }
