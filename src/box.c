@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define RESET_COLOR "\e[m"
+#define RESET_COLOR "\x1b[m"
 
 char* hex_to_rgb(char* hex_color)
 {
@@ -57,77 +57,70 @@ void print_box(struct Box box)
     char* sep_color = hex_to_rgb(box.sep_color_hex);
     char* box_color = hex_to_rgb(box.box_color_hex);
     // Top border
-    switch (box.error) {
-        case 1:
-            (void)safe_fprintf(
-                stderr, "  %s\u250F", box_color);  // Top-left corner
-            for (int i = 0; i < box_width; i++) {
-                (void)safe_fprintf(stderr, "\u2501");
-            }  // Horizontal line
-            (void)safe_fprintf(
-                stderr, "\u2513%s\n", RESET_COLOR);  // Top-right corner
+    if (box.error) {
+        (void)safe_fprintf(stderr, "  %s\u250F", box_color);  // Top-left corner
+        for (int i = 0; i < box_width; i++) {
+            (void)safe_fprintf(stderr, "\u2501");
+        }  // Horizontal line
+        (void)safe_fprintf(
+            stderr, "\u2513%s\n", RESET_COLOR);  // Top-right corner
 
-            // Middle line with text
-            (void)safe_fprintf(stderr,
-                               "  %s\u2503%s ",
-                               box_color,
-                               RESET_COLOR);  // Left border
-            (void)safe_fprintf(stderr,
-                               "%s%s%s",
-                               text_color1,
-                               box.text1,
-                               RESET_COLOR);  // First part of text
-            (void)safe_fprintf(
-                stderr, " %s\u2192%s ", sep_color, RESET_COLOR);  // Separator
-            (void)safe_fprintf(stderr,
-                               "%s%s%s",
-                               text_color2,
-                               box.text2,
-                               RESET_COLOR);  // Second part of text
-            (void)safe_fprintf(stderr,
-                               " %s\u2503%s\n",
-                               box_color,
-                               RESET_COLOR);  // Right border
+        // Middle line with text
+        (void)safe_fprintf(stderr,
+                           "  %s\u2503%s ",
+                           box_color,
+                           RESET_COLOR);  // Left border
+        (void)safe_fprintf(stderr,
+                           "%s%s%s",
+                           text_color1,
+                           box.text1,
+                           RESET_COLOR);  // First part of text
+        (void)safe_fprintf(
+            stderr, " %s\u2192%s ", sep_color, RESET_COLOR);  // Separator
+        (void)safe_fprintf(stderr,
+                           "%s%s%s",
+                           text_color2,
+                           box.text2,
+                           RESET_COLOR);  // Second part of text
+        (void)safe_fprintf(stderr,
+                           " %s\u2503%s\n",
+                           box_color,
+                           RESET_COLOR);  // Right border
 
-            // Bottom border
-            (void)safe_fprintf(
-                stderr, "  %s\u2517", box_color);  // Bottom-left corner
-            for (int i = 0; i < box_width; i++) {
-                (void)safe_fprintf(stderr, "\u2501");
-            }  // Horizontal line
-            (void)safe_fprintf(
-                stderr, "\u251B%s\n", RESET_COLOR);  // Bottom-right corner
-            break;
-        case 0:
-            printf("  %s\u250F", box_color);  // Top-left corner
-            for (int i = 0; i < box_width; i++) {
-                printf("\u2501");
-            }  // Horizontal line
-            printf("\u2513%s\n", RESET_COLOR);  // Top-right corner
+        // Bottom border
+        (void)safe_fprintf(
+            stderr, "  %s\u2517", box_color);  // Bottom-left corner
+        for (int i = 0; i < box_width; i++) {
+            (void)safe_fprintf(stderr, "\u2501");
+        }  // Horizontal line
+        (void)safe_fprintf(
+            stderr, "\u251B%s\n", RESET_COLOR);  // Bottom-right corner
+    } else {
+        printf("  %s\u250F", box_color);  // Top-left corner
+        for (int i = 0; i < box_width; i++) {
+            printf("\u2501");
+        }  // Horizontal line
+        printf("\u2513%s\n", RESET_COLOR);  // Top-right corner
 
-            // Middle line with text
-            printf("  %s\u2503%s ", box_color, RESET_COLOR);  // Left border
-            printf("%s%s%s",
-                   text_color1,
-                   box.text1,
-                   RESET_COLOR);  // First part of text
-            printf(" %s\u2192%s ", sep_color, RESET_COLOR);  // Separator
-            printf("%s%s%s",
-                   text_color2,
-                   box.text2,
-                   RESET_COLOR);  // Second part of text
-            printf(" %s\u2503%s\n", box_color, RESET_COLOR);  // Right border
+        // Middle line with text
+        printf("  %s\u2503%s ", box_color, RESET_COLOR);  // Left border
+        printf("%s%s%s",
+               text_color1,
+               box.text1,
+               RESET_COLOR);  // First part of text
+        printf(" %s\u2192%s ", sep_color, RESET_COLOR);  // Separator
+        printf("%s%s%s",
+               text_color2,
+               box.text2,
+               RESET_COLOR);  // Second part of text
+        printf(" %s\u2503%s\n", box_color, RESET_COLOR);  // Right border
 
-            // Bottom border
-            printf("  %s\u2517", box_color);  // Bottom-left corner
-            for (int i = 0; i < box_width; i++) {
-                printf("\u2501");
-            }  // Horizontal line
-            printf("\u251B%s\n", RESET_COLOR);  // Bottom-right corner
-            break;
-        default:
-            (void)safe_fprintf(stderr, "Invalid error value, use 1 or 0\n");
-            break;
+        // Bottom border
+        printf("  %s\u2517", box_color);  // Bottom-left corner
+        for (int i = 0; i < box_width; i++) {
+            printf("\u2501");
+        }  // Horizontal line
+        printf("\u251B%s\n", RESET_COLOR);  // Bottom-right corner
     }
     free(text_color1);
     free(text_color2);
