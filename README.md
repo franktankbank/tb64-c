@@ -1,8 +1,8 @@
 <h1 align="center">Welcome to tb64 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/github/v/tag/franktankbank/tb64-c?include_prereleases&sort=semver&label=version" />
   <a href="https://github.com/franktankbank/tb64/blob/main/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+    <img alt="License: GPL-3.0" src="https://img.shields.io/github/license/franktankbank/tb64-c" />
   </a>
 </p>
 
@@ -30,4 +30,4 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2025 [Frank Froggins](https://github.com/franktankbank).<br />
-This project is [MIT](https://github.com/franktankbank/tb64-c/blob/main/LICENSE) licensed.
+This project is [GPL-3.0](https://github.com/franktankbank/tb64-c/blob/main/LICENSE) licensed.
