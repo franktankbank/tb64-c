@@ -4,7 +4,6 @@ include(cmake/prelude.cmake)
 
 project(
     tb64
-    VERSION 0.1.1
     DESCRIPTION "A niche tool to encode text in base64 3 times. (C version)"
     HOMEPAGE_URL "https://github.com/franktankbank/tb64-c"
     LANGUAGES C
