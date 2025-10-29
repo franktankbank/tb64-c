@@ -1,6 +1,5 @@
 #include <string.h>
 #if defined __unix__ || __APPLE__
-#    include <asm-generic/ioctls.h>
 #    include <stdio.h>
 #    include <sys/ioctl.h>
 #endif
@@ -12,6 +11,7 @@
 #include <clip.h>
 #include <magic.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[])
 {
@@ -50,6 +50,7 @@ int main(int argc, char* argv[])
                             .box_color_hex = "#7CFC00",
                             .error = true};
         print_box(box);
+        free(encoded);
         return 1;
     }
 #elif _WIN32
@@ -64,6 +65,7 @@ int main(int argc, char* argv[])
                             .box_color_hex = "#7CFC00",
                             .error = true};
         print_box(box);
+        free(encoded);
         return 1;
     }
 #endif
@@ -86,7 +88,9 @@ int main(int argc, char* argv[])
                             .box_color_hex = "#7CFC00",
                             .error = true};
         print_box(box);
+        free(encoded);
         return 1;
     }
+    free(encoded);
     return 0;
 }
