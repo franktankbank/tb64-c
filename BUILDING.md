@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-For a list of dependencies, please refer to [vcpkg.json](vcpkg.json).
+- [Turbo-Base64 (fork)](https://github.com/franktankbank/Turbo-Base64) — GPL-3.0
 
 ## Build
 
@@ -51,4 +51,3 @@ multi-configuration generator, like the Visual Studio ones:
 ```sh
 cmake --install build --config Release
 ```
-

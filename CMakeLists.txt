@@ -10,31 +10,35 @@ project(
     LANGUAGES C
 )
 
+include(FetchContent)
+
+# Declare turbo-base64 dependency
+FetchContent_Declare(
+  turbo_base64
+  GIT_REPOSITORY https://github.com/franktankbank/Turbo-Base64.git
+  GIT_TAG        master  # or a specific tag/commit for stability
+)
+
+# Download and make the target available
+FetchContent_MakeAvailable(turbo_base64)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 include(cmake/variables.cmake)
-if(DEFINED ENV{VCPKG_ROOT})
-  set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
-  include(${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
-else()
-  message(FATAL_ERROR "vcpkg not found. Please set \'VCPKG_ROOT\'.")
-endif()
 
 # ---- Declare executable ----
 
-add_executable(tb64 src/tb64.c src/box.c src/base64.c src/clip.c src/safe.c)
+add_executable(tb64 src/tb64.c src/box.c src/clip.c src/safe.c src/base64.c)
 add_executable(tb64::exe ALIAS tb64)
 
 set_property(TARGET tb64 PROPERTY OUTPUT_NAME tb64)
 
 target_compile_features(tb64 PRIVATE c_std_99)
 
-find_package(OpenSSL REQUIRED)
-target_link_libraries(tb64 PRIVATE OpenSSL::SSL)
 target_include_directories(tb64 PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_include_directories(tb64 PRIVATE ${OPENSSL_INCLUDE_DIR})
-target_link_libraries(tb64 PRIVATE OpenSSL::Crypto)
+target_include_directories(tb64 PRIVATE ${turbo_base64_SOURCE_DIR})
+target_link_libraries(tb64 PRIVATE base64)
 
 # ---- Install rules ----
 
